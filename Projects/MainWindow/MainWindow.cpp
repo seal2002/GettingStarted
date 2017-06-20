@@ -4,6 +4,7 @@
 
 namespace OpenGLWindow
 {
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	Window::Window(int width, int height, const std::string& title)
 	{
 		glfwInit();
@@ -23,6 +24,8 @@ namespace OpenGLWindow
 		{
 			std::cout << "Failed to initilize GLAD" << std::endl;
 		}
+
+		glfwSetFramebufferSizeCallback(wnd, framebuffer_size_callback);
 	}
 	
 	Window::~Window()
@@ -46,10 +49,21 @@ namespace OpenGLWindow
 		glfwSwapBuffers(wnd);
 	}
 
+	void Window::processInput() const noexcept
+	{
+		if (glfwGetKey(wnd, GLFW_KEY_ESCAPE) == GLFW_PRESS)
+			glfwSetWindowShouldClose(wnd, true);
+	}
+
 	std::pair<int, int> Window::getWindowSize() const noexcept
 	{
 		std::pair<int, int> sz{};
 		glfwGetWindowSize(wnd, &sz.first, &sz.second);
 		return sz;
+	}
+
+	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+	{
+		glViewport(0, 0, width, height);
 	}
 }

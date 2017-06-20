@@ -8,6 +8,7 @@ int main()
 
 	while (!window.shouldClose())
 	{
+		window.processInput();
 		window.pollEvents();
 		// render
 		// ------
