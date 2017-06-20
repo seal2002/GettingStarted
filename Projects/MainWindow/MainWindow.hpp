@@ -25,7 +25,7 @@ namespace OpenGLWindow
 		void swapBuffers() const noexcept;
 
 		std::pair<int, int> getWindowSize() const noexcept;
-		
+
 	private:
 		GLFWwindow* wnd;
 	};
