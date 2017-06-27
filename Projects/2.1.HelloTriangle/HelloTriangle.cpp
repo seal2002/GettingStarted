@@ -87,6 +87,7 @@ int main()
 	while (!window.shouldClose())
 	{
 		window.pollEvents();
+		window.processInput();
 		// render
 		// ------
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);

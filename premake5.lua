@@ -100,7 +100,7 @@ end
 
 -- The windowed app
 project "1.HelloWindow"
-	kind "WindowedApp"
+	kind "ConsoleApp"
 	files "Projects/1.HelloWindow/**"
 
 	-- We also need the headers
@@ -119,7 +119,7 @@ project "1.HelloWindow"
 
 -- The windowed app
 project "2.1.HelloTriangle"
-	kind "WindowedApp"
+	kind "ConsoleApp"
 	files "Projects/2.1.HelloTriangle/**"
 
 	-- We also need the headers
@@ -138,7 +138,7 @@ project "2.1.HelloTriangle"
 
 -- The windowed app
 project "2.2.HelloTriangleIndex"
-	kind "WindowedApp"
+	kind "ConsoleApp"
 	files "Projects/2.2.HelloTriangleIndex/**"
 
 	-- We also need the headers

@@ -5,6 +5,8 @@
 namespace OpenGLWindow
 {
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
+	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
+	bool keys[1024];
 	Window::Window(int width, int height, const std::string& title)
 	{
 		glfwInit();
@@ -26,6 +28,7 @@ namespace OpenGLWindow
 		}
 
 		glfwSetFramebufferSizeCallback(wnd, framebuffer_size_callback);
+		glfwSetKeyCallback(wnd, key_callback);
 	}
 	
 	Window::~Window()
@@ -62,8 +65,23 @@ namespace OpenGLWindow
 		return sz;
 	}
 
+	void Window::getKeyPress(bool keyPress[]) const noexcept
+	{
+		memcpy(keyPress, keys, 1024);
+	}
+
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)
 	{
 		glViewport(0, 0, width, height);
+	}
+
+	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
+	{
+		if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+			glfwSetWindowShouldClose(window, GL_TRUE);
+		if (action == GLFW_PRESS)
+			keys[key] = true;
+		if (action == GLFW_RELEASE)
+			keys[key] = false;
 	}
 }
