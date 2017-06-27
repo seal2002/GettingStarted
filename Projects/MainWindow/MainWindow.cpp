@@ -6,7 +6,7 @@ namespace OpenGLWindow
 {
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 	void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-	bool keys[1024];
+	bool keys[GLFW_KEY_LAST];
 	Window::Window(int width, int height, const std::string& title)
 	{
 		glfwInit();
@@ -65,9 +65,9 @@ namespace OpenGLWindow
 		return sz;
 	}
 
-	void Window::getKeyPress(bool keyPress[]) const noexcept
+	bool* Window::getKeyPress() const noexcept
 	{
-		memcpy(keyPress, keys, 1024);
+		return keys;
 	}
 
 	void framebuffer_size_callback(GLFWwindow* window, int width, int height)

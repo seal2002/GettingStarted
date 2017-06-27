@@ -28,7 +28,7 @@ namespace OpenGLWindow
 
 		std::pair<int, int> getWindowSize() const noexcept;
 
-		void getKeyPress(bool keyPress[]) const noexcept;
+		bool * getKeyPress() const noexcept;
 
 	private:
 		GLFWwindow* wnd;
