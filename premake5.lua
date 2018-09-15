@@ -119,11 +119,13 @@ project (s)
     kind "ConsoleApp"
 
     -- We also need the headers
-    filter { "system:Windows" }
-    files "Libraries/common/*.h"
+    -- Temporary remove now - 15/09/2018
+    -- filter { "system:Windows" }
+    -- files "Libraries/common/*.h"
 
     includedirs "Projects/MainWindowLib"
     includedirs "Libraries"
+    includedirs "Libraries/common"
 
     useOpenGLWindowLib()
     links "STB_IMAGE"
@@ -137,9 +139,9 @@ project (s)
 
     filter { "system:windows" }
     vpaths {
-    ["Headers"] = "Libraries/common/**.h",
+    ["Headers/*"] = "./Projects/" .. s .. "/**.h",
     ["Sources/*"] = "./Projects/" .. s .. "/**.cpp",
-    ["Shader"] = {"**.fs", "**.vs"}
+    ["Shader/*"] = {"./Projects/" .. s .. "/**.frag", "./Projects/" .. s .. "/**.vs"}
     }
 
     filter { "system:Windows" }
@@ -148,7 +150,8 @@ end
 
 -- List of Project
 Projects = { "1.HelloWindow", "2.1.HelloTriangle", "2.2.HelloTriangleIndex", "2.3.Exercise1", "2.4.Exercise2",
-             "2.5.Exercise3"}
+             "2.5.Exercise3", "3.1.Shader", "3.2.ShaderClassInterpolation", "3.3.ShaderUniformTransform",
+             "3.4.Exercise1", "3.5.Exercise2", "3.6.Exercise3"}
 
 -- Generated project in List
 for key, value in ipairs(Projects) do
