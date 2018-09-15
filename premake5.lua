@@ -19,7 +19,7 @@ workspace "GettingStarted"
     -- We now only set settings for the Debug configuration
     filter { "configurations:Debug" }
         -- We want debug symbols in our debug config
-        flags { "Symbols" }
+        symbols "On"
 
     -- We now only set settings for Release
     filter { "configurations:Release" }
@@ -66,6 +66,19 @@ project "GLAD"
     includedirs "Libraries"
 
 -- Our second project, the static library
+project "STB_IMAGE"
+    -- kind is used to indicate the type of this project.
+    kind "StaticLib"
+    -- We specify where the source files are.
+    -- It would be better to separate header files in a folder and sources
+    -- in another, but for our simple project we will put everything in the same place.
+    -- Note: ** means recurse in subdirectories, so it will get all the files in ExampleLib/
+    files "Projects/STB_IMAGE/**"
+
+    -- We need GL, so we include it
+    includedirs "Libraries"
+
+-- Our third project, the static library
 project "OpenGLWindow"
     -- kind is used to indicate the type of this project.
     kind "StaticLib"
@@ -134,7 +147,8 @@ project (s)
 end
 
 -- List of Project
-Projects = { "1.HelloWindow", "2.1.HelloTriangle", "2.2.HelloTriangleIndex"}
+Projects = { "1.HelloWindow", "2.1.HelloTriangle", "2.2.HelloTriangleIndex", "2.3.Exercise1", "2.4.Exercise2",
+             "2.5.Exercise3"}
 
 -- Generated project in List
 for key, value in ipairs(Projects) do
