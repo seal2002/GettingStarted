@@ -12,28 +12,30 @@ struct GLFWwindow;
 
 namespace OpenGLWindow
 {	
-	class Window
-	{
-	public:
-		Window(int width, int  height, const std::string& title);
-		~Window();
+    class Window
+    {
+    public:
+        Window(int width, int  height, const std::string& title);
+        ~Window();
 
-		bool shouldClose() const noexcept;
+        bool shouldClose() const noexcept;
 
-		void pollEvents() const noexcept;
+        void pollEvents() const noexcept;
 
-		void swapBuffers() const noexcept;
+        void swapBuffers() const noexcept;
 
-		void processInput() const noexcept;
+        void processInput() const noexcept;
 
-		std::pair<int, int> getWindowSize() const noexcept;
+        std::pair<int, int> getWindowSize() const noexcept;
 
-		bool * getKeyPress() const noexcept;
+        bool * getKeyPress() const noexcept;
 
-	private:
-		GLFWwindow* wnd;
+        float getTime() const noexcept;
 
-	};
+    private:
+        GLFWwindow* wnd;
+
+    };
 }
 
 #endif
