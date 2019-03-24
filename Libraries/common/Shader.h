@@ -1,6 +1,3 @@
-#ifndef SHADER_H
-#define SHADER_H
-
 #pragma once
 
 #include <string>
@@ -100,5 +97,3 @@ public:
         glUseProgram(this->Program);
     }
 };
-
-#endif // !SHADER_H

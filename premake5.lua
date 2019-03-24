@@ -9,6 +9,10 @@ workspace "GettingStarted"
     -- We will compile for x86_32. You can change this to x86 for 32 bit builds.
     architecture "x86"
 
+    -- Use system lastest version for target to latest SDK for build Win32 version
+    filter "system:Windows"
+    systemversion "10.0.17134.0"
+
     -- Configurations are often used to store some compiler / linker settings together.
     -- The Debug configuration will be used by us while debugging.
     -- The optimized Release configuration will be used when shipping the app.
@@ -146,12 +150,16 @@ project (s)
 
     filter { "system:Windows" }
     files { './Projects/' .. s .. '/**', }
+
+    -- We add post build command to it
+    configuration "windows"
+        postbuildcommands { "copy ..\\Projects\\" .. s .. "\\*.tga" }
 end
 
 -- List of Project
 Projects = { "1.HelloWindow", "2.1.HelloTriangle", "2.2.HelloTriangleIndex", "2.3.Exercise1", "2.4.Exercise2",
              "2.5.Exercise3", "3.1.Shader", "3.2.ShaderClassInterpolation", "3.3.ShaderUniformTransform",
-             "3.4.Exercise1", "3.5.Exercise2", "3.6.Exercise3"}
+             "3.4.Exercise1", "3.5.Exercise2", "3.6.Exercise3", "4.1.Texture"}
 
 -- Generated project in List
 for key, value in ipairs(Projects) do
