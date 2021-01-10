@@ -11,7 +11,8 @@ workspace "GettingStarted"
 
     -- Use system lastest version for target to latest SDK for build Win32 version
     filter "system:Windows"
-    systemversion "10.0.17134.0"
+        systemversion "latest"
+    filter {}
 
     -- Configurations are often used to store some compiler / linker settings together.
     -- The Debug configuration will be used by us while debugging.
@@ -38,7 +39,7 @@ workspace "GettingStarted"
     -- * %{prj.name} will be replaced by "ExampleLib" / "App" / "UnitTests"
     --  * %{cfg.longname} will be replaced by "Debug" or "Release" depending on the configuration
     -- The path is relative to *this* folder
-    targetdir ("Build/Bin/%{prj.name}/%{cfg.longname}")
+    targetdir ("Build/Bin/%{cfg.longname}")
     objdir ("Build/Obj/%{prj.name}/%{cfg.longname}")
 
 -- This function includes GLFW's header files
@@ -59,6 +60,7 @@ end
 -- Our first project, the static library
 project "GLAD"
     -- kind is used to indicate the type of this project.
+    language "C"
     kind "StaticLib"
     -- We specify where the source files are.
     -- It would be better to separate header files in a folder and sources
@@ -122,6 +124,8 @@ print("Generate Project " .. s)
 project (s)
     kind "ConsoleApp"
 
+    -- We indicate that all the projects are C++ only
+    language "C++"
     -- We also need the headers
     -- Temporary remove now - 15/09/2018
     -- filter { "system:Windows" }
@@ -137,23 +141,24 @@ project (s)
 
     filter { "system:windows" }
         links { "OpenGL32" }
+    filter {}
 
     filter { "system:not windows" }
         links { "GL" }
+    filter {}
 
     filter { "system:windows" }
-    vpaths {
-    ["Headers/*"] = "./Projects/" .. s .. "/**.h",
-    ["Sources/*"] = "./Projects/" .. s .. "/**.cpp",
-    ["Shader/*"] = {"./Projects/" .. s .. "/**.frag", "./Projects/" .. s .. "/**.vs"}
-    }
+        vpaths {
+            ["Shader/*"] = {path.join("./Projects/" .. s .. "/**.frag"), path.join("./Projects/" .. s .. "/**.vs")},
+            ["code/*"] = {path.join("./Projects/" .. s .. "/**")},
+        }
+    filter {}
 
-    filter { "system:Windows" }
-    files { './Projects/' .. s .. '/**', }
+    files { path.join('./Projects/' .. s .. '/**'),}
 
     -- We add post build command to it
     configuration "windows"
-        postbuildcommands { "copy ..\\Projects\\" .. s .. "\\*.tga" }
+        postbuildcommands { "{copy} ../Projects/" .. s .. "/*.tga" }
 end
 
 -- List of Project

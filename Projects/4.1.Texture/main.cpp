@@ -17,11 +17,11 @@ GLfloat vertices[] = {
 };
 
 // Window dimensions
-const GLuint WIDTH = 800, HEIGHT = 600;
+const unsigned int WIDTH = 1280, HEIGHT = 720;
 
 int main()
 {
-    Window window{ 800, 600, "Texture"};
+    Window window{ static_cast<int>(WIDTH), static_cast<int>(HEIGHT), "Texture"};
 
     Shader myShader("..\\Projects\\4.1.Texture\\VertexShader.vs", "..\\Projects\\4.1.Texture\\FragmentShader.frag");
 
